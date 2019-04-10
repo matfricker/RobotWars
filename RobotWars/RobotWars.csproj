@@ -44,9 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Library\Direction.cs" />
-    <Compile Include="Library\Movement.cs" />
-    <Compile Include="Library\Penalty.cs" />
+    <Compile Include="Library\Enums.cs" />
     <Compile Include="Library\Position.cs" />
+    <Compile Include="Library\Robot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Library\Scenario.cs" />

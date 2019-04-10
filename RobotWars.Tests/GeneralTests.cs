@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RobotWars.Library;
 
 namespace RobotWars.Tests
 {
@@ -9,7 +10,7 @@ namespace RobotWars.Tests
         [TestMethod]
         public void NorthLeftAreEqualToWest()
         {
-            var newDirection = Direction.GetDirection("N", "L");
+            var newDirection = Direction.GetDirection("N", 'L');
             Assert.AreEqual(newDirection, "W");
         }
 
@@ -17,7 +18,7 @@ namespace RobotWars.Tests
         [TestMethod]
         public void NorthRightAreEqualToEast()
         {
-            var newDirection = Direction.GetDirection("N", "R");
+            var newDirection = Direction.GetDirection("N", 'R');
             Assert.AreEqual(newDirection, "E");
         }
 
@@ -25,7 +26,7 @@ namespace RobotWars.Tests
         [TestMethod]
         public void SouthLeftAreEqualToEast()
         {
-            var newDirection = Direction.GetDirection("S", "L");
+            var newDirection = Direction.GetDirection("S", 'L');
             Assert.AreEqual(newDirection, "E");
         }
 
@@ -33,7 +34,7 @@ namespace RobotWars.Tests
         [TestMethod]
         public void SouthRightAreEqualToWest()
         {
-            var newDirection = Direction.GetDirection("S", "R");
+            var newDirection = Direction.GetDirection("S", 'R');
             Assert.AreEqual(newDirection, "W");
         }
 
@@ -41,7 +42,7 @@ namespace RobotWars.Tests
         [TestMethod]
         public void EastLeftAreEqualToNorth()
         {
-            var newDirection = Direction.GetDirection("E", "L");
+            var newDirection = Direction.GetDirection("E", 'L');
             Assert.AreEqual(newDirection, "N");
         }
 
@@ -49,7 +50,7 @@ namespace RobotWars.Tests
         [TestMethod]
         public void EastRightAreEqualToSouth()
         {
-            var newDirection = Direction.GetDirection("E", "R");
+            var newDirection = Direction.GetDirection("E", 'R');
             Assert.AreEqual(newDirection, "S");
         }
 
@@ -57,7 +58,7 @@ namespace RobotWars.Tests
         [TestMethod]
         public void WestLeftAreEqualToSouth()
         {
-            var newDirection = Direction.GetDirection("W", "L");
+            var newDirection = Direction.GetDirection("W", 'L');
             Assert.AreEqual(newDirection, "S");
         }
 
@@ -65,7 +66,7 @@ namespace RobotWars.Tests
         [TestMethod]
         public void WestRightAreEqualToNorth()
         {
-            var newDirection = Direction.GetDirection("W", "R");
+            var newDirection = Direction.GetDirection("W", 'R');
             Assert.AreEqual(newDirection, "N");
         }
 
@@ -73,56 +74,64 @@ namespace RobotWars.Tests
         [TestMethod]
         public void OutsideXAxis()
         {
-            var currentPosition = new Position(-1, 4, "N");
-            Assert.IsTrue(Penalty.Check(currentPosition));
+            var position = new Position(-1, 4, "N");
+            Robot robot = new Robot(position);
+
+            Assert.IsTrue(robot.PenaltyCheck(position));
         }
 
         [TestCategory("Penalty")]
         [TestMethod]
         public void OutsideYAxis()
         {
-            var currentPosition = new Position(0, 5, "N");
-            Assert.IsTrue(Penalty.Check(currentPosition));
+            var position = new Position(0, 5, "N");
+            Robot robot = new Robot(position);
+
+            Assert.IsTrue(robot.PenaltyCheck(position));
         }
 
         [TestCategory("Movement")]
         [TestMethod]
         public void MoveNorthAddToYAxis()
         {
-            var currentPosition = new Position(0, 1, "N");
-            Position newPosition = Movement.Move(currentPosition, "M", out _);
+            var position = new Position(0, 1, "N");
+            Robot robot = new Robot(position);
+            robot.Move('M');
 
-            Assert.AreEqual(2, newPosition.Y);
+            Assert.AreEqual(2, robot.Position.Y);
         }
 
         [TestCategory("Movement")]
         [TestMethod]
         public void MoveSouthSubtractFromYAxis()
         {
-            var currentPosition = new Position(0, 1, "S");
-            Position newPosition = Movement.Move(currentPosition, "M", out _);
+            var position = new Position(0, 1, "S");
+            Robot robot = new Robot(position);
+            robot.Move('M');
 
-            Assert.AreEqual(0, newPosition.Y);
+            Assert.AreEqual(0, robot.Position.Y);
         }
 
         [TestCategory("Movement")]
         [TestMethod]
         public void MoveEastAddToXAxis()
         {
-            var currentPosition = new Position(1, 0, "E");
-            Position newPosition = Movement.Move(currentPosition, "M", out _);
+            var position = new Position(1, 0, "E");
+            Robot robot = new Robot(position);
+            robot.Move('M');
 
-            Assert.AreEqual(2, newPosition.X);
+            Assert.AreEqual(2, robot.Position.X);
         }
 
         [TestCategory("Movement")]
         [TestMethod]
         public void MoveWestSubtractFromXAxis()
         {
-            var currentPosition = new Position(1, 0, "W");
-            Position newPosition = Movement.Move(currentPosition, "M", out _);
+            var position = new Position(1, 0, "W");
+            Robot robot = new Robot(position);
+            robot.Move('M');
 
-            Assert.AreEqual(0, newPosition.X);
+            Assert.AreEqual(0, robot.Position.X);
         }
     }
 }

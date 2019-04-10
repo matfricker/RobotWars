@@ -2,11 +2,11 @@
 {
     public class Direction
     {
-        public static string GetDirection(string previousDirection, string rotation)
+        public static string GetDirection(string previousDirection, char rotation)
         {
             switch (rotation)
             {
-                case "L":
+                case 'L':
                     switch (previousDirection)
                     {
                         case "N":
@@ -20,7 +20,7 @@
                         default:
                             return "invalid direction";
                     }
-                case "R":
+                case 'R':
                     switch (previousDirection)
                     {
                         case "N":

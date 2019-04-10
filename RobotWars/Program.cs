@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RobotWars.Library;
+using System;
 
 namespace RobotWars
 {
@@ -31,27 +32,15 @@ namespace RobotWars
 
         private static void Process(Scenario scenario)
         {
-            int penalty = 0;
-
-            Position currentPosition = scenario.Origin;
-            Position newPostion = new Position();
+            Robot robot = new Robot(scenario.Origin);
 
             foreach (var i in scenario.Input.ToCharArray())
             {
-                newPostion = Movement.Move(currentPosition, i.ToString(), out bool hasPenalty);
-
-                if (hasPenalty)
-                {
-                    penalty++;
-                }
-
-                currentPosition = newPostion;
+                robot.Move(i);
             }
 
-            Position finalPosition = newPostion;
-
-            Console.WriteLine("Final Position: {0}, {1}, {2}", finalPosition.X, finalPosition.Y, finalPosition.Direction);
-            Console.WriteLine("Penalties: {0}", penalty);
+            Console.WriteLine("Final Position: {0}, {1}, {2}", robot.Position.X, robot.Position.Y, robot.Position.Direction);
+            Console.WriteLine("Penalties: {0}", robot.Penalty);
             Console.WriteLine("");
         }
     }
