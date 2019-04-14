@@ -45,6 +45,10 @@
   <ItemGroup>
     <Compile Include="Library\Direction.cs" />
     <Compile Include="Library\Enums.cs" />
+    <Compile Include="Library\IMovement.cs" />
+    <Compile Include="Library\MoveForward.cs" />
+    <Compile Include="Library\MoveLeft.cs" />
+    <Compile Include="Library\MoveRight.cs" />
     <Compile Include="Library\Position.cs" />
     <Compile Include="Library\Robot.cs" />
     <Compile Include="Program.cs" />

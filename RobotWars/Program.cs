@@ -7,24 +7,36 @@ namespace RobotWars
     {
         static void Main(string[] args)
         {
-            Scenario scenario1 = new Scenario();
-            scenario1.Origin = new Position(0, 2, "E");
-            scenario1.Input = "MLMRMMMRMMRR";
+            Scenario scenario1 = new Scenario
+            {
+                Origin = new Position(0, 2, "E"),
+                Input = "MLMRMMMRMMRR"
+            };
+
             Process(scenario1);
 
-            Scenario scenario2 = new Scenario();
-            scenario2.Origin = new Position(4, 4, "S");
-            scenario2.Input = "LMLLMMLMMMRMM";
+            Scenario scenario2 = new Scenario
+            {
+                Origin = new Position(4, 4, "S"),
+                Input = "LMLLMMLMMMRMM"
+            };
+
             Process(scenario2);
 
-            Scenario scenario3 = new Scenario();
-            scenario3.Origin = new Position(2, 2, "W");
-            scenario3.Input = "MLMLMLMRMRMRMRM";
+            Scenario scenario3 = new Scenario
+            {
+                Origin = new Position(2, 2, "W"),
+                Input = "MLMLMLMRMRMRMRM"
+            };
+
             Process(scenario3);
 
-            Scenario scenario4 = new Scenario();
-            scenario4.Origin = new Position(1, 3, "N");
-            scenario4.Input = "MMLMMLMMMMM";
+            Scenario scenario4 = new Scenario
+            {
+                Origin = new Position(1, 3, "N"),
+                Input = "MMLMMLMMMMM"
+            };
+
             Process(scenario4);
 
             Console.ReadLine();
@@ -32,11 +44,29 @@ namespace RobotWars
 
         private static void Process(Scenario scenario)
         {
-            Robot robot = new Robot(scenario.Origin);
+            Robot robot = new Robot()
+            {
+                Position = scenario.Origin
+            };
 
             foreach (var i in scenario.Input.ToCharArray())
             {
-                robot.Move(i);
+                robot.Input = i;
+
+                if (i == 'L')
+                {
+                    robot.Move(new MoveLeft());
+                }
+
+                if (i == 'R')
+                {
+                    robot.Move(new MoveRight());
+                }
+
+                if (i == 'M')
+                {
+                    robot.Move(new MoveForward());
+                }
             }
 
             Console.WriteLine("Final Position: {0}, {1}, {2}", robot.Position.X, robot.Position.Y, robot.Position.Direction);

@@ -1,10 +1,9 @@
 ﻿namespace RobotWars.Library
 {
-    public enum Bearing
+    public enum MovementDirection
     {
-        North,
-        South,
-        East,
-        West
-    } 
+        Forward,
+        Left,
+        Right
+    }
 }

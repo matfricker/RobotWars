@@ -10,7 +10,7 @@ namespace RobotWars.Tests
         [TestMethod]
         public void NorthLeftAreEqualToWest()
         {
-            var newDirection = Direction.GetDirection("N", 'L');
+            var newDirection = Direction.GetDirection("N", MovementDirection.Left);
             Assert.AreEqual(newDirection, "W");
         }
 
@@ -18,7 +18,7 @@ namespace RobotWars.Tests
         [TestMethod]
         public void NorthRightAreEqualToEast()
         {
-            var newDirection = Direction.GetDirection("N", 'R');
+            var newDirection = Direction.GetDirection("N", MovementDirection.Right);
             Assert.AreEqual(newDirection, "E");
         }
 
@@ -26,7 +26,7 @@ namespace RobotWars.Tests
         [TestMethod]
         public void SouthLeftAreEqualToEast()
         {
-            var newDirection = Direction.GetDirection("S", 'L');
+            var newDirection = Direction.GetDirection("S", MovementDirection.Left);
             Assert.AreEqual(newDirection, "E");
         }
 
@@ -34,7 +34,7 @@ namespace RobotWars.Tests
         [TestMethod]
         public void SouthRightAreEqualToWest()
         {
-            var newDirection = Direction.GetDirection("S", 'R');
+            var newDirection = Direction.GetDirection("S", MovementDirection.Right);
             Assert.AreEqual(newDirection, "W");
         }
 
@@ -42,7 +42,7 @@ namespace RobotWars.Tests
         [TestMethod]
         public void EastLeftAreEqualToNorth()
         {
-            var newDirection = Direction.GetDirection("E", 'L');
+            var newDirection = Direction.GetDirection("E", MovementDirection.Left);
             Assert.AreEqual(newDirection, "N");
         }
 
@@ -50,7 +50,7 @@ namespace RobotWars.Tests
         [TestMethod]
         public void EastRightAreEqualToSouth()
         {
-            var newDirection = Direction.GetDirection("E", 'R');
+            var newDirection = Direction.GetDirection("E", MovementDirection.Right);
             Assert.AreEqual(newDirection, "S");
         }
 
@@ -58,7 +58,7 @@ namespace RobotWars.Tests
         [TestMethod]
         public void WestLeftAreEqualToSouth()
         {
-            var newDirection = Direction.GetDirection("W", 'L');
+            var newDirection = Direction.GetDirection("W", MovementDirection.Left);
             Assert.AreEqual(newDirection, "S");
         }
 
@@ -66,7 +66,7 @@ namespace RobotWars.Tests
         [TestMethod]
         public void WestRightAreEqualToNorth()
         {
-            var newDirection = Direction.GetDirection("W", 'R');
+            var newDirection = Direction.GetDirection("W", MovementDirection.Right);
             Assert.AreEqual(newDirection, "N");
         }
 
@@ -74,20 +74,32 @@ namespace RobotWars.Tests
         [TestMethod]
         public void OutsideXAxis()
         {
-            var position = new Position(-1, 4, "N");
-            Robot robot = new Robot(position);
+            Position originalPosition = new Position(0, 4, "S");
+            Position position = new Position(-1, 4, "S");
+            Robot robot = new Robot()
+            {
+                Position = position
+            };
 
-            Assert.IsTrue(robot.PenaltyCheck(position));
+            robot.PenaltyCheck(originalPosition);
+
+            Assert.AreEqual(1, robot.Penalty);
         }
 
         [TestCategory("Penalty")]
         [TestMethod]
         public void OutsideYAxis()
         {
-            var position = new Position(0, 5, "N");
-            Robot robot = new Robot(position);
+            Position originalPosition = new Position(0, 4, "E");
+            Position position = new Position(0, 5, "E");
+            Robot robot = new Robot()
+            {
+                Position = position
+            };
 
-            Assert.IsTrue(robot.PenaltyCheck(position));
+            robot.PenaltyCheck(originalPosition);
+
+            Assert.AreEqual(1, robot.Penalty);
         }
 
         [TestCategory("Movement")]
@@ -95,8 +107,14 @@ namespace RobotWars.Tests
         public void MoveNorthAddToYAxis()
         {
             var position = new Position(0, 1, "N");
-            Robot robot = new Robot(position);
-            robot.Move('M');
+            Robot robot = new Robot()
+            {
+                Position = position,
+                Input = 'M'
+            };
+
+            MoveForward moveForward = new MoveForward();
+            robot.Position = moveForward.Move(robot.Position);
 
             Assert.AreEqual(2, robot.Position.Y);
         }
@@ -106,8 +124,14 @@ namespace RobotWars.Tests
         public void MoveSouthSubtractFromYAxis()
         {
             var position = new Position(0, 1, "S");
-            Robot robot = new Robot(position);
-            robot.Move('M');
+            Robot robot = new Robot()
+            {
+                Position = position,
+                Input = 'M'
+            };
+
+            MoveForward moveForward = new MoveForward();
+            robot.Position = moveForward.Move(robot.Position);
 
             Assert.AreEqual(0, robot.Position.Y);
         }
@@ -117,8 +141,14 @@ namespace RobotWars.Tests
         public void MoveEastAddToXAxis()
         {
             var position = new Position(1, 0, "E");
-            Robot robot = new Robot(position);
-            robot.Move('M');
+            Robot robot = new Robot()
+            {
+                Position = position,
+                Input = 'M'
+            };
+
+            MoveForward moveForward = new MoveForward();
+            robot.Position = moveForward.Move(robot.Position);
 
             Assert.AreEqual(2, robot.Position.X);
         }
@@ -128,8 +158,14 @@ namespace RobotWars.Tests
         public void MoveWestSubtractFromXAxis()
         {
             var position = new Position(1, 0, "W");
-            Robot robot = new Robot(position);
-            robot.Move('M');
+            Robot robot = new Robot()
+            {
+                Position = position,
+                Input = 'M'
+            };
+
+            MoveForward moveForward = new MoveForward();
+            robot.Position = moveForward.Move(robot.Position);
 
             Assert.AreEqual(0, robot.Position.X);
         }

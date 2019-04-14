@@ -1,12 +1,14 @@
-﻿namespace RobotWars
+﻿using RobotWars.Library;
+
+namespace RobotWars
 {
     public class Direction
     {
-        public static string GetDirection(string previousDirection, char rotation)
+        public static string GetDirection(string previousDirection, MovementDirection rotation)
         {
             switch (rotation)
             {
-                case 'L':
+                case MovementDirection.Left:
                     switch (previousDirection)
                     {
                         case "N":
@@ -20,7 +22,7 @@
                         default:
                             return "invalid direction";
                     }
-                case 'R':
+                case MovementDirection.Right:
                     switch (previousDirection)
                     {
                         case "N":
