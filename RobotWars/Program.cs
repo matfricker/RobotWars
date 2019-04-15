@@ -55,12 +55,12 @@ namespace RobotWars
 
                 if (i == 'L')
                 {
-                    robot.Move(new MoveLeft());
+                    robot.Move(new RotateLeft());
                 }
 
                 if (i == 'R')
                 {
-                    robot.Move(new MoveRight());
+                    robot.Move(new RotateRight());
                 }
 
                 if (i == 'M')

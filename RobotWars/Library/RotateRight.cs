@@ -1,6 +1,6 @@
 ﻿namespace RobotWars.Library
 {
-    public class MoveRight : IMovement
+    public class RotateRight : IMovement
     {
         public Position Move(Position position)
         {
