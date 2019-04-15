@@ -44,10 +44,7 @@ namespace RobotWars
 
         private static void Process(Scenario scenario)
         {
-            Robot robot = new Robot()
-            {
-                Position = scenario.Origin
-            };
+            Robot robot = new Robot(scenario.Origin);
 
             foreach (var i in scenario.Input.ToCharArray())
             {

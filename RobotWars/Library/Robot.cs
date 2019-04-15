@@ -2,6 +2,11 @@
 {
     public class Robot
     {
+        public Robot(Position position)
+        {
+            Position = position;
+        }
+
         const int MIN = 0;
 
         const int MAX = 4;
