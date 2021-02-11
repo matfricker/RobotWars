@@ -1,6 +1,4 @@
-﻿using RobotWars.Library;
-
-namespace RobotWars
+﻿namespace RobotWars.Library
 {
     public class Direction
     {

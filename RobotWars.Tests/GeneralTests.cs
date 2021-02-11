@@ -74,13 +74,8 @@ namespace RobotWars.Tests
         [TestMethod]
         public void OutsideXAxis()
         {
-            Position originalPosition = new Position(0, 4, "S");
-            Position position = new Position(-1, 4, "S");
-            Robot robot = new Robot()
-            {
-                Position = position
-            };
-
+            var originalPosition = new Position(0, 4, "S");
+            var robot = new Robot(new Position(-1, 4, "S"));
             robot.PenaltyCheck(originalPosition);
 
             Assert.AreEqual(1, robot.Penalty);
@@ -90,13 +85,8 @@ namespace RobotWars.Tests
         [TestMethod]
         public void OutsideYAxis()
         {
-            Position originalPosition = new Position(0, 4, "E");
-            Position position = new Position(0, 5, "E");
-            Robot robot = new Robot()
-            {
-                Position = position
-            };
-
+            var originalPosition = new Position(0, 4, "E");
+            var robot = new Robot(new Position(0, 5, "E"));
             robot.PenaltyCheck(originalPosition);
 
             Assert.AreEqual(1, robot.Penalty);
@@ -106,68 +96,44 @@ namespace RobotWars.Tests
         [TestMethod]
         public void MoveNorthAddToYAxis()
         {
-            var position = new Position(0, 1, "N");
-            Robot robot = new Robot()
-            {
-                Position = position,
-                Input = 'M'
-            };
+            var robot = new Robot(new Position(0, 1, "N"));
+            var moveForward = new MoveForward();
+            robot.CurrentPosition = moveForward.Move(robot.CurrentPosition);
 
-            MoveForward moveForward = new MoveForward();
-            robot.Position = moveForward.Move(robot.Position);
-
-            Assert.AreEqual(2, robot.Position.Y);
+            Assert.AreEqual(2, robot.CurrentPosition.Y);
         }
 
         [TestCategory("Movement")]
         [TestMethod]
         public void MoveSouthSubtractFromYAxis()
         {
-            var position = new Position(0, 1, "S");
-            Robot robot = new Robot()
-            {
-                Position = position,
-                Input = 'M'
-            };
+            var robot = new Robot(new Position(0, 1, "S"));
+            var moveForward = new MoveForward();
+            robot.CurrentPosition = moveForward.Move(robot.CurrentPosition);
 
-            MoveForward moveForward = new MoveForward();
-            robot.Position = moveForward.Move(robot.Position);
-
-            Assert.AreEqual(0, robot.Position.Y);
+            Assert.AreEqual(0, robot.CurrentPosition.Y);
         }
 
         [TestCategory("Movement")]
         [TestMethod]
         public void MoveEastAddToXAxis()
         {
-            var position = new Position(1, 0, "E");
-            Robot robot = new Robot()
-            {
-                Position = position,
-                Input = 'M'
-            };
+            var robot = new Robot(new Position(1, 0, "E"));
+            var moveForward = new MoveForward();
+            robot.CurrentPosition = moveForward.Move(robot.CurrentPosition);
 
-            MoveForward moveForward = new MoveForward();
-            robot.Position = moveForward.Move(robot.Position);
-
-            Assert.AreEqual(2, robot.Position.X);
+            Assert.AreEqual(2, robot.CurrentPosition.X);
         }
 
         [TestCategory("Movement")]
         [TestMethod]
         public void MoveWestSubtractFromXAxis()
         {
-            var position = new Position(1, 0, "W");
-            Robot robot = new Robot()
-            {
-                Position = position,
-                Input = 'M'
-            };
+            var robot = new Robot(new Position(1, 0, "W"));
+            var moveForward = new MoveForward();
+            robot.CurrentPosition = moveForward.Move(robot.CurrentPosition);
 
-            MoveForward moveForward = new MoveForward();
-            robot.Position = moveForward.Move(robot.Position);
-
-            Assert.AreEqual(0, robot.Position.X);
+            Assert.AreEqual(0, robot.CurrentPosition.X);
         }
     }
 }

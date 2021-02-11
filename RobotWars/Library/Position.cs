@@ -1,4 +1,4 @@
-﻿namespace RobotWars
+﻿namespace RobotWars.Library
 {
     public class Position
     {
@@ -11,8 +11,28 @@
             Direction = direction;
         }
 
-        public int X { get; set; }
-        public int Y { get; set; }
-        public string Direction { get; set; }
+        public int IncrementX()
+        {
+            return X++;
+        }
+        
+        public int IncrementY()
+        {
+            return Y++;
+        }
+        
+        public int DecrementX()
+        {
+            return X--;
+        }
+        
+        public int DecrementY()
+        {
+            return Y--;
+        }
+
+        public int X { get; private set; }
+        public int Y { get; private set; }
+        public string Direction { get; }
     }
 }

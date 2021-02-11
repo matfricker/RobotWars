@@ -2,43 +2,40 @@
 {
     public class Robot
     {
-        public Robot(Position position)
+        public Robot(Position currentPosition)
         {
-            Position = position;
+            CurrentPosition = currentPosition;
         }
 
-        const int MIN = 0;
+        private const int Min = 0;
+        private const int Max = 4;
 
-        const int MAX = 4;
+        public Position CurrentPosition { get; set; }
 
-        public char Input { get; set; }
-
-        public Position Position { get; set; }
-
-        public int Penalty { get; set; }
+        public int Penalty { get; private set; }
 
         public void Move(IMovement movement)
         {
-            Position originalPosition = Position;
-            Position = movement.Move(Position);
-            Position = PenaltyCheck(originalPosition);
+            var originalPosition = new Position(CurrentPosition.X, CurrentPosition.Y, CurrentPosition.Direction);
+            CurrentPosition = movement.Move(CurrentPosition);
+            CurrentPosition = PenaltyCheck(originalPosition);
         }
 
         public Position PenaltyCheck(Position originalPosition)
         {
-            if (Position.X < MIN || Position.X > MAX)
+            if (CurrentPosition.X < Min || CurrentPosition.X > Max)
             {
                 Penalty++;
                 return originalPosition;
             }
 
-            if (Position.Y < MIN || Position.Y > MAX)
+            if (CurrentPosition.Y < Min || CurrentPosition.Y > Max)
             {
                 Penalty++;
                 return originalPosition;
             }
 
-            return Position;
+            return CurrentPosition;
         }
     }
 }

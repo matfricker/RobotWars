@@ -1,4 +1,4 @@
-﻿namespace RobotWars
+﻿namespace RobotWars.Library
 {
     public class Scenario
     {

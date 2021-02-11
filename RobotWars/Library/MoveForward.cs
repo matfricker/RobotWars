@@ -5,28 +5,23 @@
         public Position Move(Position position)
         {
             // MOVE FORWARD
-            int X = position.X;
-            int Y = position.Y;
-
             switch (position.Direction)
             {
                 case "N":
-                    Y++;
+                    position.IncrementY();
                     break;
                 case "S":
-                    Y--;
+                    position.DecrementY();
                     break;
                 case "E":
-                    X++;
+                    position.IncrementX();
                     break;
                 case "W":
-                    X--;
-                    break;
-                default:
+                    position.DecrementX();
                     break;
             }
 
-            return new Position(X, Y, position.Direction);
+            return position;
         }
     }
 }
