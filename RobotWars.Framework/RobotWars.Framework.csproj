@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{7D9C141B-6F1F-4348-B363-B467F7C88EF6}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>RobotWars</RootNamespace>
-    <AssemblyName>RobotWars</AssemblyName>
+    <RootNamespace>RobotWars.Framework</RootNamespace>
+    <AssemblyName>RobotWars.Framework</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

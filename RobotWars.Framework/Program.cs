@@ -1,7 +1,7 @@
 ﻿using RobotWars.Library;
 using System;
 
-namespace RobotWars
+namespace RobotWars.Framework
 {
     public class Program
     {
@@ -13,7 +13,7 @@ namespace RobotWars
                 Input = "MLMRMMMRMMRR"
             };
 
-            Process(scenario1);
+            Run(scenario1);
 
             var scenario2 = new Scenario
             {
@@ -21,7 +21,7 @@ namespace RobotWars
                 Input = "LMLLMMLMMMRMM"
             };
 
-            Process(scenario2);
+            Run(scenario2);
 
             var scenario3 = new Scenario
             {
@@ -29,7 +29,7 @@ namespace RobotWars
                 Input = "MLMLMLMRMRMRMRM"
             };
 
-            Process(scenario3);
+            Run(scenario3);
 
             var scenario4 = new Scenario
             {
@@ -37,34 +37,54 @@ namespace RobotWars
                 Input = "MMLMMLMMMMM"
             };
 
-            Process(scenario4);
+            Run(scenario4);
 
             Console.ReadLine();
         }
 
-        private static void Process(Scenario scenario)
+        private static void Run(Scenario scenario)
         {
             var robot = new Robot(scenario.Origin);
 
-            foreach (var i in scenario.Input.ToCharArray())
+            foreach (var c in scenario.Input.ToCharArray())
             {
-                switch (i)
+                switch (ConvertCharToEnum(c))
                 {
-                    case 'L':
+                    case MovementDirection.Left:
                         robot.Move(new RotateLeft());
                         break;
-                    case 'R':
+                    case MovementDirection.Right:
                         robot.Move(new RotateRight());
                         break;
-                    case 'M':
+                    case MovementDirection.Forward:
                         robot.Move(new MoveForward());
                         break;
                 }
             }
 
-            Console.WriteLine("Final Position: {0}, {1}, {2}", robot.CurrentPosition.X, robot.CurrentPosition.Y, robot.CurrentPosition.Direction);
-            Console.WriteLine("Penalties: {0}", robot.Penalty);
+            Console.WriteLine("Final Position: {0}, {1}, {2}", 
+                robot.CurrentPosition.X, 
+                robot.CurrentPosition.Y, 
+                robot.CurrentPosition.Direction);
+
+            Console.WriteLine("Penalties: {0}", 
+                robot.Penalty);
+
             Console.WriteLine("");
+        }
+
+        private static MovementDirection ConvertCharToEnum(char character)
+        {
+            if (character == 'M')
+                return MovementDirection.Forward;
+
+            if (character == 'L')
+                return MovementDirection.Left;
+
+            if (character == 'R')
+                return MovementDirection.Right;
+
+            throw new ArgumentException($"Invalid Character Passed: {character}.");
         }
     }
 }
