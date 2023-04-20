@@ -43,20 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Library\Direction.cs" />
-    <Compile Include="Library\Enums.cs" />
-    <Compile Include="Library\IMovement.cs" />
-    <Compile Include="Library\MoveForward.cs" />
-    <Compile Include="Library\RotateLeft.cs" />
-    <Compile Include="Library\RotateRight.cs" />
-    <Compile Include="Library\Position.cs" />
-    <Compile Include="Library\Robot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Library\Scenario.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RobotWars.Core\RobotWars.Core.csproj">
+      <Project>{7cdb8441-270a-4cff-87b3-1abc2485f6b8}</Project>
+      <Name>RobotWars.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

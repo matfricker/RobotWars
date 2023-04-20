@@ -1,4 +1,4 @@
-﻿namespace RobotWars.Library
+﻿namespace RobotWars.Core
 {
     public enum MovementDirection
     {

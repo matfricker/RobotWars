@@ -1,10 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RobotWars.Library;
+using RobotWars.Core;
 
 namespace RobotWars.Tests
 {
     [TestClass]
-    public class GeneralTests
+    public class General
     {
         [TestCategory("Direction")]
         [TestMethod]
